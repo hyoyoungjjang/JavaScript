@@ -43,7 +43,7 @@
         name3 = "jiwon";
         console.log(name3);
 
-        let h2E12 = document.getElementById("test");
+        const h2E12 = document.getElementById("test");
         h2E12.innerHTML = "??";
 
         /*
@@ -52,14 +52,182 @@
             2) 특수문자중에서는 $와_사용할 수 있다.
             3) 숫자로 변수명을 시작할 수 없다.
             4) 키워드를 변수명으로 사용할 수 없다.
-                var, let, const
+                var, let, const, for ...
 
             Naming Type
 
             1) camelCase -> 대부분의 언어에서 많이 사용하며 단어의 시작마다 대문자로 구분을 해준다.
             2) snake_case -> 파이썬에서 주로 사용하며 단어의 시작마다_로 구분해준다.
         */
-
     </script>
+
+    <h3>* 자료형</h3>
+    <p>
+        변수 선언시 자료형을 별도로 지정하지 않음(자료형의 개념이 없는 건 아니다.)
+        => 한줄씩 실행되는 인터프리터 언어 특성상 변수에 대입되는 값에 따라서 알아서 자료형이 결정된다.
+    </p>
+
+    <h4> 자바스크립트 자료형</h4>
+    <ul>
+        <li>Number(숫자)</li>
+        <li>String(문자열)</li>
+        <li>Boolean(불리언)</li>
+        <li>undefined(언디파인드)</li>
+        <li>null(널)</li>
+        <li>Symbol</li>
+        <li>Object(객체)</li>
+        <!--Function, Array, Object-->
+    </ul>
+    <button onclick="typeTest();">자료형테스트</button>
+    <script>
+        function typeTest(){
+            //number
+            const age = 55;
+            const tempature = -10;
+            const pi = 3.141592;
+
+            console.log(typeof age);
+            console.log(typeof tempature);
+            console.log(typeof pi);
+
+            const infinity = Infinity;
+            const nInfinity = -Infinity;
+            console.log(infinity);
+            console.log(typeof infinity);
+            console.log(nInfinity);
+            console.log(typeof nInfinity);
+
+            // String
+            /*
+                1) newline => \n
+                2) tab => \t
+                3) \ => \\
+            */
+
+            const str = "안녕하세요 저는 김효영입니다. \n \t 나이는 22살 입니다";
+            console.log(str);
+
+            const name = "김효영";
+            console.log("안녕하세요" + name + "입니다");
+            console.log('안녕하세요' + name + '입니다');
+            console.log(`안녕하세요 ${name}입니다`);
+
+            //Boolean
+            const isTrue = true;
+            const isFalse = false;
+            console.log(typeof isTrue);
+            console.log(typeof isFalse);
+
+            /*
+                undefined
+
+                개발자가 직접 값을 초기화하지 않았을 때
+                지정되는 값이다.
+
+                undefined를 직접 넣어주는 것은 지양해야된다.
+            */
+
+            let num;
+            console.log(num);
+            console.log(typeof num);
+
+            /*
+                null 타입
+
+                undefined와 마찬가지로 값이 없다는 뜻이다.
+                다만 js에서 개발자가명시적으로 없는 값을 초기화할 때
+                null이 사용된다
+            */
+
+            let init = null;
+            console.log(init);
+            console.log(typeof init);
+
+            /*
+                Symbol 타입
+
+                유일무이한 값을 생성할 때
+                다른 원시값들과 다르게 Symbol함수를
+                호출해서 사용한다.
+            */
+
+            const tmp1 = '1';
+            const tmp2 = '1';
+            console.log(tmp1 == tmp2); // ==로 비교시 값만 string으로 변환해서 비교
+            console.log(tmp1 === tmp2); // 자료형까지 그대로 비교
+            
+            const tmp3 = Symbol('1');
+            const tmp4 = Symbol('1');
+
+            console.log(tmp3 === tmp4);
+
+            /*
+                object 타입
+                Map
+                키 : 벨류 쌍으로 이루어져있다.
+                key : value
+            */
+
+            const dictionary = {
+                red : "빨간색",
+                orange : "주황색",
+                yellow : "노란색"
+            };
+
+            console.log(dictionary.red);
+            console.log(dictionary['orange'])
+            console.log(typeof dictionary);
+            dictionary.red = "붉은색";
+            dictionary['orange'] = "주홍색";
+            console.log(dictionary.red);
+            console.log(dictionary['orange'])
+            dictionary.blue = '파란색'
+            console.log(dictionary.blue);
+
+            //Array 타입 - 값을 리스트로 나열할 수 있는 타입
+            const strArr = []; //[빨간색]
+            strArr.push("빨간색");
+            strArr.push("주황색");
+            console.log(strArr);
+            console.log(strArr.pop());
+            console.log(strArr);
+            strArr[0] = "노란색";//[노랑색]
+            console.log(strArr[0])
+            console.log(strArr);
+            console.log(strArr.length);
+
+            const customerList = [];
+            customerList.push({
+                name : "최지원",
+                age : 22,
+                gender : "여"
+            });
+
+            customerList.push({
+                name : "김효영",
+                age : 22,
+                gender : "남"
+            });
+
+            console.log(customerList);
+            customerMenu(customerList)
+            console.log(customerList);
+
+            function customerMenu(customerList){
+                //const customerUl = document.createElement('ul');
+                const customerMenu = "<ul>"
+                for(let i = 0; i <customerList.length; i++){
+                    let customer = customerList[i];
+                    const customerInfo = `<li>이름 : ${customer.name}</li>` +
+                                        `<li>나이 : ${customer.age}</li>` +
+                                        `<li>성별 : ${customer.gender}</li>` ;   
+                    customerMenu += customerInfo;
+                }  
+                
+                customerInfo += "</ul>"
+            }
+        }
+    </script>
+
 </body>
 </html>
